@@ -63,3 +63,13 @@
 *Stats will update every Monday automatically*
 <!-- WAKATIME_END -->
 
+## 🕹️ Pacman Contribution Graph
+<!-- PACMAN_START -->
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/janakassab/janakassab/output/pacman-contribution-graph-dark.svg">
+    <img src="https://raw.githubusercontent.com/janakassab/janakassab/output/pacman-contribution-graph.svg" alt="Pacman Contribution Graph"/>
+  </picture>
+</p>
+<!-- PACMAN_END -->
+
