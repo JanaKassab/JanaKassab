@@ -3,7 +3,7 @@
 <p align="center">
   Backend Dev • Cloud & Data • AI Curious<br/>
   <a href="https://www.linkedin.com/in/jana-kassab">LinkedIn</a> •
-  <a href="mailto:janakassab.dev@gmail.com">Email</a> •
+  <a href="mailto:Kassabjana5@gmail.com">Email</a> •
   <a href="https://github.com/janakassab">GitHub</a>
 </p>
 
