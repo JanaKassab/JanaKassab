@@ -1,0 +1,19 @@
+name: WakaTime Weekly Stats
+
+on:
+  schedule:
+    - cron: "24 5 * * 1" # every Monday at 05:24 UTC
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: athul/waka-readme@v0.3.0
+        with:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          SHOW_TITLE: "true"
+          TIME_RANGE: last_7_days
+          COMMIT_MESSAGE: "chore: update WakaTime stats"
+          IGNORED_LANGUAGES: "JSON,YAML,Markdown"
+          SECTION_NAME: "WAKATIME"
