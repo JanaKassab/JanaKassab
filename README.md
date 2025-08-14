@@ -57,8 +57,9 @@
 ## 🧠 Today I Learned
 > _This section updates daily via GitHub Actions._
 
-<!-- TIL_START -->
 
-Still loading today's nugget... ⏳
+## ⏱️ Weekly Dev Metrics
+<!-- WAKATIME_START -->
+*Stats will update every Monday automatically*
+<!-- WAKATIME_END -->
 
-<!-- TIL_END -->
