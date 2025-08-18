@@ -22,7 +22,7 @@
 
 ---
 
-## 📊 Live Stats (auto-updating)
+## 📊 Live Stats 
 <p align="center">
   <!-- GitHub Streak -->
   <picture>
@@ -65,13 +65,6 @@
 
 ---
 
-## 🧠 Today I Learned
-> _This section updates daily via GitHub Actions._
-
-## ⏱️ Weekly Dev Metrics
-<!-- WAKATIME_START -->
-*Stats will update every Monday automatically*
-<!-- WAKATIME_END -->
 
 ## 🕹️ Pacman Contribution Graph
 <!-- PACMAN_START -->
