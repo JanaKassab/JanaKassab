@@ -30,12 +30,9 @@
 
 ## 📊 Live Stats
 <p align="center">
-  <!-- GitHub Streak -->
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=janakassab&theme=github-dark&hide_border=true&date_format=n%2Fj%5B%2FY%5D&fire=DD2727&currStreakNum=FFFFFF&sideNums=FFFFFF&currStreakLabel=FFFFFF&sideLabels=FFFFFF&stroke=00000000&background=0D111700&cache_seconds=86400">
-    <img height="165" src="https://streak-stats.demolab.com?user=janakassab&hide_border=true&date_format=n%2Fj%5B%2FY%5D&stroke=00000000&cache_seconds=86400&t=1" alt="streak stats"/>
-  </picture>
+  <img height="165" src="./assets/streak.svg" alt="GitHub Streak"/>
 </p>
+
 
 <p align="center">
   <!-- GitHub Stats -->
