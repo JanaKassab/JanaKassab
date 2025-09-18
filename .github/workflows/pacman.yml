@@ -42,4 +42,19 @@ jobs:
             -e 's/#e4e2e2/#30363d/Ig' \
             -e 's/#24292e/#c9d1d9/Ig' \
             -e 's/#000000/#c9d1d9/Ig' \
-            dist
+            dist/pacman-contribution-graph-dark.svg
+          # Sanity checks
+          test -s dist/pacman-contribution-graph.svg
+          test -s dist/pacman-contribution-graph-dark.svg
+          # List for debug
+          ls -lah dist | cat
+
+      - name: Push dist/ to output branch
+        uses: crazy-max/ghaction-github-pages@v3.1.0
+        with:
+          target_branch: output         # files end up at root of 'output'
+          build_dir: dist               # so URLs have no /dist in them
+          commit_message: "chore: update pacman graphs"
+          keep_history: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
