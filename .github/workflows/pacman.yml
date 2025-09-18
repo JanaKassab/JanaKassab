@@ -2,7 +2,7 @@ name: Generate pacman animation
 
 on:
   schedule:
-    - cron: "0 */12 * * *"   # once every 12 hours, at minute 0 (UTC)
+    - cron: "0 */12 * * *"   # once every 12 hours (UTC)
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -14,13 +14,12 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Generate pacman-contribution-graph.svg
-        uses: abozanona/pacman-contribution-graph@v1
+        uses: abozanona/pacman-contribution-graph@1.0.10.2
         with:
           github_user_name: ${{ github.repository_owner }}
 
@@ -29,8 +28,6 @@ jobs:
         run: |
           set -euo pipefail
           cp dist/pacman-contribution-graph.svg dist/pacman-contribution-graph-dark.svg
-
-          # Replace light palette with GitHub Dark palette
           sed -i \
             -e 's/#ffffff/#0d1117/Ig' \
             -e 's/#fff/#0d1117/Ig' \
