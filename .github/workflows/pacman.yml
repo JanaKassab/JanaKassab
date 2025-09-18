@@ -2,39 +2,44 @@ name: Generate pacman animation
 
 on:
   schedule:
-    - cron: "* */12 * * *"
+    - cron: "0 */12 * * *"   # once every 12 hours, at minute 0 (UTC)
   workflow_dispatch:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   generate:
-    permissions:
-      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
-      - name: generate pacman-contribution-graph.svg
-        uses: abozanona/pacman-contribution-graph@main
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate pacman-contribution-graph.svg
+        uses: abozanona/pacman-contribution-graph@v1
         with:
           github_user_name: ${{ github.repository_owner }}
 
-      # Make a DARK variant by replacing common light colors with GitHub Dark palette
       - name: Create dark variant
+        shell: bash
         run: |
+          set -euo pipefail
           cp dist/pacman-contribution-graph.svg dist/pacman-contribution-graph-dark.svg
-          # Tweak these replacements after first run if your colors differ.
+
+          # Replace light palette with GitHub Dark palette
           sed -i \
-            -e 's/#ffffff/#0d1117/Ig' \        # background → GitHub dark bg
+            -e 's/#ffffff/#0d1117/Ig' \
             -e 's/#fff/#0d1117/Ig' \
-            -e 's/#e4e2e2/#30363d/Ig' \        # light grid/border → dark border
-            -e 's/#c9d1d9/#c9d1d9/Ig' \        # keep text nice on dark
-            -e 's/#24292e/#c9d1d9/Ig' \        # dark text → light text
-            -e 's/#000000/#c9d1d9/Ig' \        # black strokes → light for contrast
+            -e 's/#e4e2e2/#30363d/Ig' \
+            -e 's/#24292e/#c9d1d9/Ig' \
+            -e 's/#000000/#c9d1d9/Ig' \
             dist/pacman-contribution-graph-dark.svg
 
-      - name: push pacman-contribution-graph.svg to the output branch
+      - name: Push dist/ to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
