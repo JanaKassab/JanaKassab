@@ -37,19 +37,28 @@ jobs:
           set -euo pipefail
           test -f dist/pacman-contribution-graph.svg
 
-          # Make dark copy
+          # Duplicate to dark variant
           cp dist/pacman-contribution-graph.svg dist/pacman-contribution-graph-dark.svg
 
-          # Recolor to GitHub Dark palette (tweak if your source palette differs)
+          echo "== Top colors in source =="
+          grep -oE '#[0-9a-fA-F]{3,6}' dist/pacman-contribution-graph-dark.svg \
+            | sort -i | uniq -ci | sort -nr | head -n 30 || true
+
+          # Recolor to GitHub Dark palette
           sed -i \
             -e 's/#ffffff/#0d1117/Ig' \
             -e 's/#fff/#0d1117/Ig' \
+            -e 's/#ebedf0/#161b22/Ig' \
             -e 's/#e4e2e2/#30363d/Ig' \
+            -e 's/#d0d7de/#30363d/Ig' \
             -e 's/#24292e/#c9d1d9/Ig' \
             -e 's/#000000/#c9d1d9/Ig' \
             dist/pacman-contribution-graph-dark.svg
 
-          # Prepare assets/
+          # Handle rgb() empty-cell notation if present
+          sed -i -E "s/rgb\\(\\s*235\\s*,\\s*237\\s*,\\s*240\\s*\\)/#161b22/Ig" dist/pacman-contribution-graph-dark.svg
+
+          # Prepare assets
           mkdir -p assets
           cp dist/pacman-contribution-graph.svg assets/pacman-contribution-graph.svg
           cp dist/pacman-contribution-graph-dark.svg assets/pacman-contribution-graph-dark.svg
@@ -57,6 +66,7 @@ jobs:
           # Sanity checks
           test -s assets/pacman-contribution-graph.svg
           test -s assets/pacman-contribution-graph-dark.svg
+          ls -lah assets | cat
 
       - name: Commit & push to main
         shell: bash
