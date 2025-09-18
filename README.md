@@ -74,9 +74,10 @@
 <!-- PACMAN_START -->
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/JanaKassab/JanaKassab/output/pacman-contribution-graph-dark.svg">
-    <img src="https://raw.githubusercontent.com/JanaKassab/JanaKassab/output/pacman-contribution-graph.svg" alt="Pacman Contribution Graph"/>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/pacman-contribution-graph-dark.svg?v=1">
+    <img src="./assets/pacman-contribution-graph.svg?v=1" alt="Pacman Contribution Graph"/>
   </picture>
 </p>
+
 
 <!-- PACMAN_END -->
