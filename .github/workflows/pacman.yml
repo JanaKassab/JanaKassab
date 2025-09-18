@@ -1,8 +1,9 @@
+# .github/workflows/pacman.yml
 name: Generate pacman animation
 
 on:
   schedule:
-    - cron: "0 */12 * * *"   # once every 12 hours (UTC)
+    - cron: "0 */12 * * *"   # every 12h (UTC)
   workflow_dispatch:
   push:
     branches: [ main ]
@@ -18,10 +19,12 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
 
       - name: Generate pacman-contribution-graph.svg
         uses: abozanona/pacman-contribution-graph@1.0.10.2
@@ -32,10 +35,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Ensure output exists
           test -f dist/pacman-contribution-graph.svg
-          # Duplicate and recolor to dark theme
+
+          # Make dark copy
           cp dist/pacman-contribution-graph.svg dist/pacman-contribution-graph-dark.svg
+
+          # Recolor to GitHub Dark palette (tweak if your source palette differs)
           sed -i \
             -e 's/#ffffff/#0d1117/Ig' \
             -e 's/#fff/#0d1117/Ig' \
@@ -43,18 +48,26 @@ jobs:
             -e 's/#24292e/#c9d1d9/Ig' \
             -e 's/#000000/#c9d1d9/Ig' \
             dist/pacman-contribution-graph-dark.svg
-          # Sanity checks
-          test -s dist/pacman-contribution-graph.svg
-          test -s dist/pacman-contribution-graph-dark.svg
-          # List for debug
-          ls -lah dist | cat
 
-      - name: Push dist/ to output branch
-        uses: crazy-max/ghaction-github-pages@v3.1.0
-        with:
-          target_branch: output         # files end up at root of 'output'
-          build_dir: dist               # so URLs have no /dist in them
-          commit_message: "chore: update pacman graphs"
-          keep_history: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Prepare assets/
+          mkdir -p assets
+          cp dist/pacman-contribution-graph.svg assets/pacman-contribution-graph.svg
+          cp dist/pacman-contribution-graph-dark.svg assets/pacman-contribution-graph-dark.svg
+
+          # Sanity checks
+          test -s assets/pacman-contribution-graph.svg
+          test -s assets/pacman-contribution-graph-dark.svg
+
+      - name: Commit & push to main
+        shell: bash
+        run: |
+          set -e
+          git config user.name "readme-bot"
+          git config user.email "actions@github.com"
+          git add assets/pacman-contribution-graph*.svg
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update pacman graphs"
+            git push origin HEAD:main
+          fi
