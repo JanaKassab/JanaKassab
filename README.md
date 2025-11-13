@@ -1,7 +1,7 @@
 <!-- Profile Header -->
 <h1 align="center">Hi, I'm Jana Kassab ✨</h1>
 <p align="center">
-  Backend Dev • Cloud & Data • AI Curious<br/>
+  Full Stack Dev • Cloud & Data • AI Curious<br/>
   <a href="https://www.linkedin.com/in/jana-kassab">LinkedIn</a> •
   <a href="mailto:Kassabjana5@gmail.com">Email</a> •
   <a href="https://github.com/janakassab">GitHub</a>
